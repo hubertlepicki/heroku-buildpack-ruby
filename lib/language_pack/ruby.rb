@@ -252,8 +252,8 @@ private
   # install the vendored ruby
   # @return [Boolean] true if it installs the vendored ruby and false otherwise
   def install_ruby
-    if ENV["SYSTEM_RUBY"]
-      install_system_ruby ENV["SYSTEM_RUBY"]
+    if system_ruby
+      install_system_ruby system_ruby
     else
       install_ruby_orig
     end
@@ -440,7 +440,7 @@ WARNING
     bin_dir = "bin"
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
-      File.symlink(file,name)
+      File.symlink(file,name) unless File.exists?(name)
     end
   end
 
@@ -450,8 +450,12 @@ WARNING
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
   end
 
+  def system_ruby
+    ENV["SYSTEM_RUBY"]
+  end
+
   def load_default_cache?
-    new_app? && ruby_version.default?
+    new_app? && ruby_version.default? && !system_ruby
   end
 
   # loads a default bundler cache for new apps to speed up initial bundle installs
