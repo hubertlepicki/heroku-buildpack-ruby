@@ -79,7 +79,7 @@ WARNING
 
         topic("Preparing app for Rails asset pipeline")
 
-        unless ENV["SKIP_ASSETS_CACHE"]
+        if ENV["SKIP_ASSETS_CACHE"]
           @cache.load public_assets_folder
           @cache.load default_assets_cache
         end
