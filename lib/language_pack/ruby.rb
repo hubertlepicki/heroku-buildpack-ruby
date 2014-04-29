@@ -268,6 +268,8 @@ private
       install_symlink("gem",  "#{dir}/#{file.gsub("ruby","gem")}")
       install_symlink("ri",   "#{dir}/#{file.gsub("ruby","ri")}")
       install_symlink("rdoc", "#{dir}/#{file.gsub("ruby","rdoc")}")
+
+      ENV["PATH"] = "#{File.expand_path(bin_dir)}:#{ENV["PATH"]}"
     end
   end
 
