@@ -269,7 +269,7 @@ private
       install_symlink("ri",   "#{dir}/#{file.gsub("ruby","ri")}")
       install_symlink("rdoc", "#{dir}/#{file.gsub("ruby","rdoc")}")
 
-      ENV["PATH"] = "#{File.expand_path(bin_dir)}:#{ENV["PATH"]}"
+      ENV["PATH"] = "#{File.expand_path("bin")}:#{ENV["PATH"]}"
     end
   end
 
