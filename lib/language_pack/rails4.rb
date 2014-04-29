@@ -79,8 +79,10 @@ WARNING
 
         topic("Preparing app for Rails asset pipeline")
 
-        @cache.load public_assets_folder
-        @cache.load default_assets_cache
+        unless ENV["SKIP_ASSETS_CACHE"]
+          @cache.load public_assets_folder
+          @cache.load default_assets_cache
+        end
 
         precompile.invoke(env: rake_env)
 
